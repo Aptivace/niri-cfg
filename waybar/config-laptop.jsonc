@@ -1,0 +1,132 @@
+{
+  "position": "top",
+  "margin-left": 0,
+  "margin-right": 0,
+  "height": 26,
+  "modules-left": ["niri/workspaces", "niri/window"],
+  "modules-center": ["group/time"],
+  "modules-right": [
+    "privacy",
+    "niri/language",
+    "group/laptop",
+    "group/zvuk",
+    "group/hardware",
+    "tray",
+    "network"
+  ],
+  "niri/window": {
+    "format": "{app_id}",
+    "max-length": 35,
+    "rewrite": {
+      "(.*) - Alacritty": "Terminal]"
+    },
+    "separate-outputs": false
+  },
+  "niri/language": {
+    "format": "<span color=\"#e6c384\"></span>  {}",
+    "format-en": "EN",
+    "format-ru": "RU"
+  },
+  "niri/workspaces": {
+    "on-click": "activate",
+    "sort-by-number": true,
+    "all-outputs": true,
+    //"current-only": true
+    "display-condition": "only-populated"
+  },
+
+  "group/laptop": {
+    "orientation": "horizontal",
+    "modules": ["backlight", "battery"]
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "<span color=\"#e6c384\">{icon}</span>  {percent}%",
+    "format-icons": ["", ""]
+  },
+  "battery": {
+    "interval": 60,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "events": {
+      "on-discharging-warning": "notify-send -u normal 'Low Battery'",
+      "on-discharging-critical": "notify-send -u critical 'Very Low Battery'",
+      "on-charging-100": "notify-send -u normal 'Battery Full!'",
+      "on-discharging": "notify-send -u normal 'Power Switch' Discharging",
+      "on-charging": "notify-send -u normal 'Power Switch' Charging'"
+    },
+    "format": "<span color=\"#e6c384\">{icon}</span>  {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "max-length": 25
+  },
+
+  // Hardware info
+  "group/hardware": {
+    "orientation": "horizontal",
+    "modules": ["cpu", "memory"]
+  },
+  "cpu": {
+    "format": "<span color=\"#e6c384\"></span>  {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "<span color=\"#e6c384\"></span>  {percentage}%"
+  },
+
+  // Audio info
+  "group/zvuk": {
+    "orientation": "horizontal",
+    "modules": ["pulseaudio#output", "pulseaudio#input"]
+  },
+  "pulseaudio#output": {
+    "format": "<span color=\"#e6c384\">{icon}</span>  {volume}%",
+    "format-muted": " ",
+    "format-icons": {
+      "headphone": "",
+      "default": ["", "", ""],
+    },
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+  },
+  "pulseaudio#input": {
+    "format": "{format_source}",
+    "format-source": "<span color=\"#e6c384\"></span> {volume}%",
+    "format-source-muted": " ",
+    "tooltip-format": "{source_desc}",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+  },
+
+  // Time
+  "group/time": {
+    "modules": ["clock", "clock#simple"],
+    "orientation": "horizontal",
+  },
+  "clock#simple": {
+    "format": "{:%H:%M:%S}",
+    "tooltip": false,
+    "interval": 1,
+  },
+  "clock": {
+    "format": "{:L%a %d, %b %Y}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%d-%m-%Y}",
+  },
+
+  "privacy": {
+    "icon-size": 15,
+    "icon-spacing": 8,
+  },
+  "network": {
+    "format-wifi": "<span color=\"#e6c384\"> </span>",
+    "format-ethernet": "<span color=\"#e6c384\"> </span>",
+    "format-disconnected": "<span color=\"#e6c384\">⚠</span>",
+    "tooltip": true,
+    "tooltip-format-wifi": "{essid}"
+  },
+  "tray": {
+    "spacing": 10,
+  },
+}
