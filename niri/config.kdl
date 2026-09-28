@@ -91,8 +91,8 @@ input {
 // Find more information on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-output "DP-1" {
-    mode "1920x1080@165.003"
+output "eDP-1" {
+    mode "1920x1080@60.000"
     focus-at-startup
 
     scale 1
@@ -102,12 +102,6 @@ output "DP-1" {
     position x=0 y=0
 }
 
-output "HDMI-A-1" {
-    mode "1920x1080@74.973"
-    scale 1
-    transform "normal"
-    position x=1920 y=0
-}
 
 
 layout {
@@ -277,7 +271,6 @@ spawn-at-startup "wireplumber"
 spawn-at-startup "dunst"
 spawn-at-startup "awww-daemon"
 spawn-at-startup "waybar"
-spawn-at-startup "/home/aptivace/.config/swayidle/run.sh"
 
 
 
@@ -420,12 +413,12 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+E hotkey-overlay-title="Open file manager: Thunar" {spawn "thunar";}
-    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
-    Mod+Shift+W hotkey-overlay-title="Choose wallpaper" { spawn "/home/aptivace/.config/rofi/scripts/wallpapermenu.sh"; }
-    Mod+M hotkey-overlay-title="Power menu" { spawn "/home/aptivace/.config/rofi/scripts/powermenu.sh"; }
-    Mod+Shift+C hotkey-overlay-title="Color picker: hyprpicker" { spawn "hyprpicker" "--format=hex" "--autocopy"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
+    Mod+D hotkey-overlay-title="Run an Application: Rofi" { spawn "rofi" "-show" "drun"; }
+    Mod+Shift+W hotkey-overlay-title="Choose wallpaper" { spawn-sh "~/.config/rofi/scripts/wallpapermenu.sh"; }
+    Mod+M hotkey-overlay-title="Power menu" { spawn-sh "~/.config/rofi/scripts/powermenu.sh"; }
+    Mod+Shift+C hotkey-overlay-title="Color picker: Hyprpicker" { spawn "hyprpicker" "--format=hex" "--autocopy"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: Hyprlock" { spawn "hyprlock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
